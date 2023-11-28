@@ -1,6 +1,15 @@
 "use client";
 
 import {
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormField,
+  Form,
+} from "@/components/ui/form";
+import {
   DialogTitle,
   DialogFooter,
   DialogHeader,
@@ -9,29 +18,38 @@ import {
   Dialog,
 } from "@/components/ui/dialog";
 
-import {useForm} from "react-hook-form"
+import { Button } from "@/components/ui/button";
+
+import { Input } from "@/components/ui/input";
+
+import { useForm } from "react-hook-form";
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
-    name: z.string().min(1,{
-        message:"server name is required."
-    }),
-    imageUrl: z.string().min(1,{
-        message:"Photu jaruri hai"
-
-    })
-})
+  name: z.string().min(1, {
+    message: "server name is required.",
+  }),
+  imageUrl: z.string().min(1, {
+    message: "Photu jaruri hai",
+  }),
+});
 export const InitialModal = () => {
-    const form = useForm({
-        defaultValues :{
-            defaultValues:{
-                name : "",
-                imageUrl:"",
-            }
-        }
-    })
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      defaultValues: {
+        name: "",
+        imageUrl: "",
+      },
+    },
+  });
+
+  const isLoading = form.formState.isSubmitting;
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+  };
 
   return (
     <Dialog open={true}>
@@ -44,7 +62,6 @@ export const InitialModal = () => {
             Giver your group a name and image you want you can change it later.
           </DialogDescription>
         </DialogHeader>
-        
       </DialogContent>
     </Dialog>
   );
