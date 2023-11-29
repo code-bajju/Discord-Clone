@@ -39,10 +39,8 @@ export const InitialModal = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      defaultValues: {
-        name: "",
-        imageUrl: "",
-      },
+      name: "",
+      imageUrl: "",
     },
   });
 
@@ -62,6 +60,26 @@ export const InitialModal = () => {
             Giver your group a name and image you want you can change it later.
           </DialogDescription>
         </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="space-y-8 px-6">
+              <div className="flex items-center justify-center text-center">
+                image upload kr
+              </div>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
+                      Server name
+                    </FormLabel>
+                  </FormItem>
+                )}
+              />
+            </div>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
