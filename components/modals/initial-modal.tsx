@@ -29,7 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
   name: z.string().min(1, {
-    message: "server name is required.",
+    message: "Gang name is required.",
   }),
   imageUrl: z.string().min(1, {
     message: "Photu jaruri hai",
@@ -54,17 +54,17 @@ export const InitialModal = () => {
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
-            Customize new GROUP
+            Tereko New Gang Banana Padega
           </DialogTitle>
           <DialogDescription className="text-center text-zinc">
-            Giver your group a name and image you want you can change it later.
+            New Gang ka Naam or image daal idhar, Baad me change bhi kr skta hai tu
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 px-6">
               <div className="flex items-center justify-center text-center">
-                image upload kr
+                Kadak Si photo daal
               </div>
               <FormField
                 control={form.control}
@@ -72,12 +72,24 @@ export const InitialModal = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                      Server name
+                      Gang ka naam
                     </FormLabel>
+                    <FormControl>
+                        <Input disabled={isLoading} className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0" placeholder="Gang Ka Naam likh"
+                        
+                        {...field}/>
+                    </FormControl>
+                    <FormMessage/>
                   </FormItem>
                 )}
               />
             </div>
+            <DialogFooter className="bg-gray-100 px-6 py-4">
+                <Button variant='primary' disabled={isLoading}>
+                    Bana
+                </Button>
+
+            </DialogFooter>
           </form>
         </Form>
       </DialogContent>
